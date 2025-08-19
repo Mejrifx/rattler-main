@@ -25,12 +25,24 @@ export default function RattlerLandingPage() {
   const finalCtaRef = useRef<HTMLHeadingElement>(null)
 
   const galleryImages = [
-    "/cute-pink-lily-meme.png",
-    "/sparkly-cheek-lily-meme.png",
-    "/abstract-chain-lily-mascot.png",
-    "/lily-adventure-meme-coin.png",
-    "/cyber-lily-snake.png",
-    "/lily-community-meme-collection.png",
+    "/Rattler Confused.jpg",
+    "/Rattler Eating.jpg",
+    "/Rattler Gun.jpg",
+    "/Rattler Hissing.jpg",
+    "/Rattler Middlefinger.jpg",
+    "/Rattler On Phone.jpg",
+    "/Rattler Opening Door.jpg",
+    "/Rattler Painting.jpg",
+    "/Rattler Pouring Coffee.jpg",
+    "/Rattler Reading.jpg",
+    "/Rattler Scratching Head.jpg",
+    "/Rattler Singing.jpg",
+    "/Rattler Sippin Wine.jpg",
+    "/Rattler Sipping Coffee.jpg",
+    "/Rattler Snake Game.jpg",
+    "/Rattler With a Key.jpg",
+    "/Rattler Yawning.jpg",
+    "/rattler-coffee.png",
   ]
 
   useEffect(() => {
@@ -581,7 +593,7 @@ Strike Fast, Strike Hard, Strike $RTR
                     <img
                       src={src || "/placeholder.svg"}
                       alt={`Rattler gallery image ${index + 1}`}
-                      className="w-full h-64 md:h-80 object-cover"
+                      className="w-full h-64 md:h-80 object-contain bg-black/20"
                     />
                   </div>
                 ))}
@@ -731,7 +743,7 @@ Strike Fast, Strike Hard, Strike $RTR
           <p className="text-xl text-gray-300 mb-12">Connect with our amazing community across all platforms</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <SocialButton icon={X} label="X" href="https://x.com/RattlerOnAbs" />
+            <SocialButton icon={X} label="𝕏" href="https://x.com/RattlerOnAbs" />
             <SocialButton icon={ExternalLink} label="Dex" href="https://dexscreener.com/abstract/0xba0f1818bc028eda1c44792ac361c4cedd804c3b" />
             <SocialButton icon={Send} label="Telegram" href="https://t.me/rtrabs" />
             <SocialButton icon={ShoppingCart} label="Buy $RTR" href="https://portal.abs.xyz/trade?buy=0xc3882e7ce4d62bb571a6f417419c4e0ecb82d944&showChart=true&showHistory=true" />
