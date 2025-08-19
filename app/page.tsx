@@ -12,6 +12,7 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5)
 
   const heroTextRef = useRef<HTMLDivElement>(null)
   const journeyTitleRef = useRef<HTMLHeadingElement>(null)
@@ -129,6 +130,10 @@ export default function RattlerLandingPage() {
     setTimeout(() => {
       setShowNotification(false)
     }, 3000)
+  }
+
+  const loadMoreImages = () => {
+    setVisibleImages(prev => Math.min(prev + 5, galleryImages.length)) // Load 5 more images (1 more row)
   }
 
   const TokenomicsCard = ({ title, value, description }: { title: string; value: string; description: string }) => (
@@ -579,7 +584,7 @@ Strike Fast, Strike Hard, Strike $RTR
 
                   {/* Grid Gallery */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
-          {galleryImages.map((src, index) => (
+          {galleryImages.slice(0, visibleImages).map((src, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-500 hover:scale-105 cursor-pointer"
@@ -589,21 +594,14 @@ Strike Fast, Strike Hard, Strike $RTR
               onClick={() => setSelectedImage(src)}
             >
               {/* Image */}
-              <img
-                src={src || "/placeholder.svg"}
+                    <img
+                      src={src || "/placeholder.svg"}
                 alt={`Rattler gallery image ${index + 1}`}
                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-              />
+                    />
               
               {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-green-500/20 backdrop-blur-sm rounded-full p-4 border border-green-400/50">
-                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
-                  </div>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
               </div>
 
               {/* Glow Effect */}
@@ -615,7 +613,7 @@ Strike Fast, Strike Hard, Strike $RTR
               <div className="absolute inset-0 bg-green-400/20 opacity-0 group-active:opacity-100 transition-opacity duration-200 rounded-xl"></div>
             </div>
           ))}
-        </div>
+            </div>
 
         {/* Gallery Stats */}
         <div className="text-center mt-8">
@@ -623,6 +621,22 @@ Strike Fast, Strike Hard, Strike $RTR
             Exclusive Rattler Artwork
           </p>
         </div>
+
+        {/* Load More Button */}
+        {visibleImages < galleryImages.length && (
+          <div className="text-center mt-8">
+            <Button
+              onClick={loadMoreImages}
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-black font-bold py-3 px-8 rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-green-400/30"
+              style={{
+                boxShadow: "0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(34, 197, 94, 0.2)",
+                fontFamily: "'Orbitron', monospace"
+              }}
+            >
+              Load More Artwork
+            </Button>
+          </div>
+        )}
         </div>
       </section>
 
@@ -659,13 +673,13 @@ Strike Fast, Strike Hard, Strike $RTR
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2
-              ref={adventureTitleRef}
+              <h2
+                ref={adventureTitleRef}
               className="text-4xl md:text-5xl font-bold text-green-400 mb-6 animate-slide-down opacity-0"
               style={{ transform: "translateY(-50px)", fontFamily: "'Orbitron', monospace" }}
-            >
+              >
               How to buy $RATTLER
-            </h2>
+              </h2>
             <p className="text-xl text-gray-300 mb-8">
               Ready to slide into the coolest adventure? Grab your token, join the Rattler squad, and waddle your way to frosty fun!
             </p>
