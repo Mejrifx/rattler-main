@@ -11,6 +11,7 @@ export default function RattlerLandingPage() {
   const [scrollY, setScrollY] = useState(0)
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const heroTextRef = useRef<HTMLDivElement>(null)
   const journeyTitleRef = useRef<HTMLHeadingElement>(null)
@@ -577,14 +578,15 @@ Strike Fast, Strike Hard, Strike $RTR
           </h2>
 
                   {/* Grid Gallery */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
           {galleryImages.map((src, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-500 hover:scale-105"
+              className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-500 hover:scale-105 cursor-pointer"
               style={{
                 aspectRatio: "1/1"
               }}
+              onClick={() => setSelectedImage(src)}
             >
               {/* Image */}
               <img
@@ -594,11 +596,13 @@ Strike Fast, Strike Hard, Strike $RTR
               />
               
               {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-green-400 font-semibold text-sm" style={{ fontFamily: "'Orbitron', monospace" }}>
-                    Rattler #{index + 1}
-                  </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-green-500/20 backdrop-blur-sm rounded-full p-4 border border-green-400/50">
+                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
 
@@ -615,8 +619,8 @@ Strike Fast, Strike Hard, Strike $RTR
 
         {/* Gallery Stats */}
         <div className="text-center mt-8">
-          <p className="text-gray-400">
-            <span className="text-lime-400 font-bold text-xl">{galleryImages.length}</span> Exclusive Rattler Artworks
+          <p className="text-gray-400 text-lg">
+            Exclusive Rattler Artwork
           </p>
         </div>
         </div>
@@ -791,6 +795,54 @@ Strike Fast, Strike Hard, Strike $RTR
           </div>
         </div>
       </section>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-7xl max-h-full">
+            {/* Close Button */}
+            <button
+              className="absolute -top-4 -right-4 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 shadow-2xl"
+              onClick={(e) => {
+                e.stopPropagation()
+                setSelectedImage(null)
+              }}
+              aria-label="Close image"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Modal Image */}
+            <img
+              src={selectedImage}
+              alt="Rattler artwork full view"
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              style={{
+                boxShadow: "0 0 100px rgba(34, 197, 94, 0.3), 0 0 200px rgba(132, 204, 22, 0.2)"
+              }}
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {/* Modal Glow Effect */}
+            <div 
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                boxShadow: "0 0 80px rgba(34, 197, 94, 0.4), 0 0 160px rgba(132, 204, 22, 0.3)"
+              }}
+            ></div>
+          </div>
+
+          {/* Click to close instruction */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <p className="text-green-400 text-lg font-semibold backdrop-blur-sm bg-black/50 px-6 py-3 rounded-full border border-green-500/30" style={{ fontFamily: "'Orbitron', monospace" }}>
+              Click anywhere to close
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
