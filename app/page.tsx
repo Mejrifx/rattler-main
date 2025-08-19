@@ -748,7 +748,16 @@ Strike Fast, Strike Hard, Strike $RTR
           <p className="text-xl text-gray-300 mb-12">Connect with our amazing community across all platforms</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <SocialButton icon={X} label="X" href="https://x.com/RattlerOnAbs" />
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-black/60 border-green-500/50 text-lime-400 hover:bg-green-500/20 hover:border-lime-400 hover:text-lime-300 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+              asChild
+            >
+              <a href="https://x.com/RattlerOnAbs" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <X className="w-5 h-5" />
+              </a>
+            </Button>
             <SocialButton icon={ExternalLink} label="Dex" href="https://dexscreener.com/abstract/0xba0f1818bc028eda1c44792ac361c4cedd804c3b" />
             <SocialButton icon={Send} label="Telegram" href="https://t.me/rtrabs" />
             <SocialButton icon={ShoppingCart} label="Buy $RTR" href="https://portal.abs.xyz/trade?buy=0xc3882e7ce4d62bb571a6f417419c4e0ecb82d944&showChart=true&showHistory=true" />
