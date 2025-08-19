@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ChevronLeft, ChevronRight, Send, Instagram, ExternalLink, X, ShoppingCart } from "lucide-react"
+import { Send, Instagram, ExternalLink, X, ShoppingCart } from "lucide-react"
 
 export default function RattlerLandingPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
   const [scrollY, setScrollY] = useState(0)
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
@@ -121,13 +121,7 @@ export default function RattlerLandingPage() {
     }
   }, [])
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length)
-  }
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
-  }
 
   const showCopyNotification = () => {
     setShowNotification(true)
@@ -582,57 +576,49 @@ Strike Fast, Strike Hard, Strike $RTR
             Rattler's Gallery
           </h2>
 
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
-              >
-                {galleryImages.map((src, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
-                    <img
-                      src={src || "/placeholder.svg"}
-                      alt={`Rattler gallery image ${index + 1}`}
-                      className="w-full h-64 md:h-80 object-contain bg-black/20"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 border-green-500/30 text-green-400 hover:bg-green-500/10"
-              onClick={prevImage}
-              aria-label="Previous image"
+                  {/* Grid Gallery */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+          {galleryImages.map((src, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-500 hover:scale-105"
+              style={{
+                aspectRatio: "1/1"
+              }}
             >
-              <ChevronLeft className="w-6 h-6" />
-            </Button>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 border-green-500/30 text-green-400 hover:bg-green-500/10"
-              onClick={nextImage}
-              aria-label="Next image"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </Button>
-          </div>
-
-          <div className="flex justify-center mt-6 space-x-2">
-            {galleryImages.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex ? "bg-pink-500" : "bg-gray-600"
-                }`}
-                onClick={() => setCurrentImageIndex(index)}
-                aria-label={`Go to image ${index + 1}`}
+              {/* Image */}
+              <img
+                src={src || "/placeholder.svg"}
+                alt={`Rattler gallery image ${index + 1}`}
+                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
               />
-            ))}
-          </div>
+              
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-green-400 font-semibold text-sm" style={{ fontFamily: "'Orbitron', monospace" }}>
+                    Rattler #{index + 1}
+                  </p>
+                </div>
+              </div>
+
+              {/* Glow Effect */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500" style={{
+                boxShadow: "0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(132, 204, 22, 0.2)"
+              }}></div>
+
+              {/* Click Ripple Effect */}
+              <div className="absolute inset-0 bg-green-400/20 opacity-0 group-active:opacity-100 transition-opacity duration-200 rounded-xl"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Gallery Stats */}
+        <div className="text-center mt-8">
+          <p className="text-gray-400">
+            <span className="text-lime-400 font-bold text-xl">{galleryImages.length}</span> Exclusive Rattler Artworks
+          </p>
+        </div>
         </div>
       </section>
 
