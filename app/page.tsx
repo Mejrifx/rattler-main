@@ -660,6 +660,7 @@ Strike Fast, Strike Hard, Strike $RTR
                 variant="outline"
                 size="lg"
                 className="bg-green-500/20 border-green-500 text-green-400 hover:bg-green-500/30 hover:scale-105 transition-all duration-300"
+                onClick={() => window.open('https://memedepot.com/d/rattler', '_blank')}
               >
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Explore Memedepot
@@ -747,7 +748,7 @@ Strike Fast, Strike Hard, Strike $RTR
           <p className="text-xl text-gray-300 mb-12">Connect with our amazing community across all platforms</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <SocialButton icon={X} label="𝕏" href="https://x.com/RattlerOnAbs" />
+            <SocialButton icon={X} label="X" href="https://x.com/RattlerOnAbs" />
             <SocialButton icon={ExternalLink} label="Dex" href="https://dexscreener.com/abstract/0xba0f1818bc028eda1c44792ac361c4cedd804c3b" />
             <SocialButton icon={Send} label="Telegram" href="https://t.me/rtrabs" />
             <SocialButton icon={ShoppingCart} label="Buy $RTR" href="https://portal.abs.xyz/trade?buy=0xc3882e7ce4d62bb571a6f417419c4e0ecb82d944&showChart=true&showHistory=true" />
