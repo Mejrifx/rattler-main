@@ -195,32 +195,32 @@
 }
 
 .float-animation {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .sparkle-animation {
-  animation: sparkle 2s ease-in-out infinite;
+  animation: sparkle 3s ease-in-out infinite;
 }
 
 .glow-animation {
-  animation: glow 2s ease-in-out infinite;
+  animation: glow 3s ease-in-out infinite;
 }
 
-/* Added animation classes for scroll-triggered effects */
+/* Optimized animation classes for scroll-triggered effects */
 .animate-slide-up {
-  animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideUp 0.5s ease-out forwards;
 }
 
 .animate-slide-down {
-  animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideDown 0.5s ease-out forwards;
 }
 
 .animate-slide-left {
-  animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideLeft 0.5s ease-out forwards;
 }
 
 .animate-slide-right {
-  animation: slideRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideRight 0.5s ease-out forwards;
 }
 
 .parallax-bg {

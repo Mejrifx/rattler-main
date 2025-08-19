@@ -48,7 +48,17 @@ export default function RattlerLandingPage() {
   ]
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    // Throttled scroll handler for better performance
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
 
     const observerOptions = {
       threshold: 0.1,
@@ -59,6 +69,7 @@ export default function RattlerLandingPage() {
       setTimeout(() => {
         element.style.transform = "translateY(0) translateX(0)"
         element.style.opacity = "1"
+        element.style.transition = "all 0.4s ease-out" // Faster transitions
       }, delay)
     }
 
@@ -68,27 +79,30 @@ export default function RattlerLandingPage() {
           const element = entry.target as HTMLElement
 
           if (element === heroTextRef.current) {
-            // Staggered animation for hero elements
+            // Reduced stagger for hero elements
             const children = element.children
             Array.from(children).forEach((child, index) => {
-              animateElement(child as HTMLElement, index * 200)
+              animateElement(child as HTMLElement, index * 100) // Reduced from 200ms
             })
           } else if (element === journeyTextRef.current) {
-            // Animate journey text paragraphs with stagger
+            // Reduced stagger for journey text
             const paragraphs = element.querySelectorAll("p, .badge-container")
             paragraphs.forEach((p, index) => {
-              animateElement(p as HTMLElement, index * 300)
+              animateElement(p as HTMLElement, index * 150) // Reduced from 300ms
             })
           } else if (element === adventureTextRef.current) {
-            // Animate adventure text paragraphs with stagger
+            // Reduced stagger for adventure text
             const paragraphs = element.querySelectorAll("p")
             paragraphs.forEach((p, index) => {
-              animateElement(p as HTMLElement, index * 300)
+              animateElement(p as HTMLElement, index * 150) // Reduced from 300ms
             })
           } else {
             // Standard slide-in animation for titles
             animateElement(element)
           }
+          
+          // Unobserve after animation to reduce ongoing work
+          observer.unobserve(element)
         }
       })
     }, observerOptions)
@@ -112,10 +126,10 @@ export default function RattlerLandingPage() {
       if (el) observer.observe(el)
     })
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     
     // Trigger hero animation on load
-    setTimeout(() => setHeroVisible(true), 500)
+    setTimeout(() => setHeroVisible(true), 300) // Reduced from 500ms
 
     return () => {
       window.removeEventListener("scroll", handleScroll)
@@ -193,12 +207,10 @@ export default function RattlerLandingPage() {
         {/* Base gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-green-950 to-black"></div>
         
-        {/* Animated glow orbs */}
-        <div className="absolute top-20 left-20 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/3 right-20 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-lime-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute top-2/3 right-1/3 w-64 h-64 bg-green-400/12 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '6s' }}></div>
-        <div className="absolute bottom-20 right-20 w-88 h-88 bg-emerald-600/18 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '8s' }}></div>
+        {/* Simplified static glow orbs - much better performance */}
+        <div className="absolute top-20 left-20 w-96 h-96 bg-green-500/10 rounded-full blur-xl"></div>
+        <div className="absolute top-1/3 right-20 w-80 h-80 bg-emerald-500/8 rounded-full blur-xl"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-lime-500/6 rounded-full blur-lg"></div>
         
         {/* Subtle moving gradients */}
         <div className="absolute inset-0 opacity-30">
@@ -222,11 +234,11 @@ export default function RattlerLandingPage() {
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden">
         {/* Background Image with Blending */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
           style={{
             backgroundImage: "url('/rattler-mainbg.jpg')",
-            transform: `translateY(${scrollY * 0.3}px)`,
-            scale: "1.1"
+            transform: `translateY(${scrollY * 0.15}px)`, // Reduced parallax intensity
+            scale: "1.05" // Reduced scale
           }}
         />
         
@@ -240,10 +252,10 @@ export default function RattlerLandingPage() {
           }}
         />
         
-        {/* Snake-themed Animated Glow Effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/25 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-lime-500/15 rounded-full blur-2xl animate-pulse delay-500" />
+        {/* Simplified Snake-themed Static Glow Effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/12 rounded-full blur-xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-xl" />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-lime-500/8 rounded-full blur-lg" />
 
         <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative">
           <div
@@ -587,30 +599,29 @@ Strike Fast, Strike Hard, Strike $RTR
           {galleryImages.slice(0, visibleImages).map((src, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-500 hover:scale-105 cursor-pointer"
+              className="group relative overflow-hidden rounded-xl bg-black/20 backdrop-blur-sm border border-green-500/20 hover:border-green-400/50 transition-all duration-200 hover:scale-102 cursor-pointer"
               style={{
                 aspectRatio: "1/1"
               }}
               onClick={() => setSelectedImage(src)}
             >
-              {/* Image */}
+                            {/* Image with lazy loading */}
                     <img
                       src={src || "/placeholder.svg"}
                 alt={`Rattler gallery image ${index + 1}`}
-                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                    />
+                className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
               
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+              {/* Simplified Hover Effects */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               </div>
 
-              {/* Glow Effect */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500" style={{
-                boxShadow: "0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(132, 204, 22, 0.2)"
+              {/* Reduced Glow Effect */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{
+                boxShadow: "0 0 20px rgba(34, 197, 94, 0.3)"
               }}></div>
-
-              {/* Click Ripple Effect */}
-              <div className="absolute inset-0 bg-green-400/20 opacity-0 group-active:opacity-100 transition-opacity duration-200 rounded-xl"></div>
             </div>
           ))}
             </div>
@@ -843,11 +854,12 @@ Strike Fast, Strike Hard, Strike $RTR
             <img
               src={selectedImage}
               alt="Rattler artwork full view"
-              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl will-change-transform"
               style={{
-                boxShadow: "0 0 100px rgba(34, 197, 94, 0.3), 0 0 200px rgba(132, 204, 22, 0.2)"
+                boxShadow: "0 0 50px rgba(34, 197, 94, 0.3)"
               }}
               onClick={(e) => e.stopPropagation()}
+              loading="eager"
             />
 
             {/* Modal Glow Effect */}
