@@ -296,10 +296,16 @@ export default function RattlerLandingPage() {
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-            isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-          }`}>
-            <div className="px-4 py-6 space-y-4 bg-black/40 backdrop-blur-lg rounded-2xl mt-4 border border-green-500/20">
+          <div className={`md:hidden transition-all duration-500 ease-in-out ${
+            isMobileMenuOpen 
+              ? "max-h-96 opacity-100 visible" 
+              : "max-h-0 opacity-0 invisible"
+          } overflow-hidden`}>
+            <div className={`px-4 py-6 space-y-4 bg-black/40 backdrop-blur-lg rounded-2xl mt-4 border border-green-500/20 transition-all duration-500 ease-in-out ${
+              isMobileMenuOpen 
+                ? "transform translate-y-0 scale-100" 
+                : "transform -translate-y-4 scale-95"
+            }`}>
               {[
                 { label: 'About', target: 'about' },
                 { label: 'How to Buy', target: 'howtobuy' },
@@ -395,12 +401,56 @@ export default function RattlerLandingPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-xl" />
         <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-lime-500/8 rounded-full blur-lg" />
 
-        <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative flex flex-col justify-between min-h-[calc(100vh-8rem)] md:min-h-0 md:block">
+        {/* Mobile-only: Title at top */}
+        <div className="md:hidden text-center z-20 max-w-4xl mx-auto relative pt-4 mb-8">
+          <h1
+            className={`text-3xl font-bold mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+              heroVisible 
+                ? "opacity-100 transform translate-x-0" 
+                : "opacity-0 transform -translate-x-full"
+            }`}
+            style={{
+              transitionDelay: "0.2s",
+              textShadow: "0 0 40px rgba(34, 197, 94, 0.6), 0 0 80px rgba(132, 204, 22, 0.4), 0 0 120px rgba(16, 185, 129, 0.3)",
+              filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7))",
+              fontFamily: "'Orbitron', monospace",
+              letterSpacing: "0.05em"
+            }}
+          >
+            Welcome to Rattler's World
+          </h1>
+
+          {/* Mobile-only: Rattler coffee image */}
+          <div
+            className={`mb-6 flex justify-center transition-all duration-1000 ease-out ${
+              heroVisible 
+                ? "opacity-100 transform scale-100" 
+                : "opacity-0 transform scale-95"
+            }`}
+            style={{
+              transitionDelay: "0.4s"
+            }}
+          >
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-400/50 shadow-2xl">
+              <img 
+                src="/rattler-coffee.png" 
+                alt="Rattler" 
+                className="w-full h-full object-cover"
+                style={{
+                  filter: "drop-shadow(0 0 20px rgba(34, 197, 94, 0.5))"
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative flex flex-col justify-between min-h-[calc(100vh-16rem)] md:min-h-0 md:block">
           
-          {/* Text Content - Mobile: Top, Desktop: Same */}
+          {/* Text Content - Mobile: Modified, Desktop: Same */}
           <div className="flex-1 flex flex-col justify-center md:block">
+            {/* Desktop-only title */}
             <h1
-              className={`text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+              className={`hidden md:block text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform -translate-x-full"
@@ -423,7 +473,7 @@ export default function RattlerLandingPage() {
                   : "opacity-0 transform translate-x-full"
               }`}
               style={{
-                transitionDelay: "0.4s",
+                transitionDelay: "0.6s",
                 textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(34, 197, 94, 0.3)",
                 filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
                 fontFamily: "'Courier New', monospace"
@@ -440,7 +490,7 @@ export default function RattlerLandingPage() {
                   : "opacity-0 transform translate-y-8"
               }`}
               style={{
-                transitionDelay: "0.6s",
+                transitionDelay: "0.8s",
                 textShadow: "0 0 30px rgba(132, 204, 22, 0.6), 0 0 60px rgba(34, 197, 94, 0.4), 0 2px 8px rgba(0, 0, 0, 0.9)",
                 filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7))",
                 fontFamily: "'Orbitron', monospace",
