@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Send, Instagram, ExternalLink, X, ShoppingCart } from "lucide-react"
+import { Send, Instagram, ExternalLink, X, ShoppingCart, Menu } from "lucide-react"
 
 export default function RattlerLandingPage() {
 
@@ -12,8 +12,9 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5)
+  const [visibleImages, setVisibleImages] = useState(16) // Show 16 images initially (3 rows of 5 + 1 row of 1, leaving 2 in last row)
   const [isNavVisible, setIsNavVisible] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const heroTextRef = useRef<HTMLDivElement>(null)
   const journeyTitleRef = useRef<HTMLHeadingElement>(null)
@@ -227,8 +228,12 @@ export default function RattlerLandingPage() {
               className="flex items-center gap-3 cursor-pointer group"
               onClick={() => scrollToSection('hero')}
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <span className="text-black font-bold text-sm">R</span>
+              <div className="w-8 h-8 rounded-full overflow-hidden group-hover:scale-110 transition-all duration-300 border-2 border-green-400/50 group-hover:border-green-300">
+                <img 
+                  src="/rattler-coffee.png" 
+                  alt="Rattler Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-lime-300 bg-clip-text text-transparent group-hover:drop-shadow-[0_0_10px_rgba(34,197,94,0.8)] transition-all duration-300" style={{ fontFamily: "'Orbitron', monospace" }}>
                 RATTLER
@@ -260,7 +265,7 @@ export default function RattlerLandingPage() {
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* Desktop CTA Button */}
             <Button
               className="hidden md:block bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-black font-bold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 shadow-lg border border-green-400/30 backdrop-blur-sm"
               style={{
@@ -272,6 +277,62 @@ export default function RattlerLandingPage() {
                 Buy $RTR
               </a>
             </Button>
+
+            {/* Mobile Hamburger Menu */}
+            <button
+              className="md:hidden p-2 text-gray-300 hover:text-lime-400 transition-all duration-300 group"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+            >
+              <div className="relative">
+                <Menu className="w-6 h-6 transition-all duration-300" />
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300" style={{
+                  background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.2) 0%, transparent 70%)",
+                  boxShadow: "0 0 15px rgba(34, 197, 94, 0.3)"
+                }}></div>
+              </div>
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          <div className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
+            isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          }`}>
+            <div className="px-4 py-6 space-y-4 bg-black/40 backdrop-blur-lg rounded-2xl mt-4 border border-green-500/20">
+              {[
+                { label: 'About', target: 'about' },
+                { label: 'How to Buy', target: 'howtobuy' },
+                { label: 'Gallery', target: 'gallery' },
+                { label: 'Community', target: 'community' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    scrollToSection(item.target)
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className="block w-full text-left px-4 py-3 text-gray-300 hover:text-lime-400 transition-all duration-300 rounded-lg hover:bg-green-500/10 border border-transparent hover:border-green-400/30"
+                >
+                  <span className="font-medium">{item.label}</span>
+                </button>
+              ))}
+              
+              {/* Mobile CTA Button */}
+              <div className="pt-4 border-t border-green-500/20">
+                <Button
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-black font-bold py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg border border-green-400/30"
+                  style={{
+                    boxShadow: "0 0 20px rgba(34, 197, 94, 0.3)"
+                  }}
+                  asChild
+                >
+                  <a href="https://portal.abs.xyz/trade?buy=0xc3882e7ce4d62bb571a6f417419c4e0ecb82d944&showChart=true&showHistory=true" target="_blank" rel="noopener noreferrer">
+                    Buy $RTR
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -476,14 +537,14 @@ Strike Fast, Strike Hard, Strike $RTR
                   observer.observe(el)
                 }
               }}
-              className="bg-black/20 backdrop-blur-sm border border-green-500/20 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto transition-all duration-700 ease-out opacity-0"
+              className="bg-black/20 backdrop-blur-sm border border-green-500/20 rounded-2xl p-4 md:p-8 lg:p-10 max-w-4xl mx-auto transition-all duration-700 ease-out opacity-0"
               style={{ 
                 transform: "translateY(50px) translateX(-30px)",
                 boxShadow: "0 20px 40px rgba(0, 0, 0, 0.7), 0 0 40px rgba(34, 197, 94, 0.2)"
               }}
             >
-              <p className="text-xl md:text-2xl text-green-100 leading-relaxed">
-                <strong className="text-lime-400 text-2xl md:text-3xl">The First Snake Of Abstract 🐍</strong>
+              <p className="text-lg md:text-xl lg:text-2xl text-green-100 leading-relaxed">
+                <strong className="text-lime-400 text-xl md:text-2xl lg:text-3xl">The First Snake Of Abstract 🐍</strong>
                 <br /><br />
                 RATTLER / RTR the notorious and most feared Africa's Venomous snake with a grudge in his heart for whoever killed its parents. Someone from Abstract chain who knew all the culprits summoned RTR to take its revenge while that guy smartly plays the divide and conquer game as Rattler poisons / chokes all the competition 😈
               </p>
@@ -506,13 +567,13 @@ Strike Fast, Strike Hard, Strike $RTR
                   observer.observe(el)
                 }
               }}
-              className="bg-black/80 backdrop-blur-lg border border-green-500/30 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto ml-auto transition-all duration-700 ease-out opacity-0"
+              className="bg-black/80 backdrop-blur-lg border border-green-500/30 rounded-2xl p-4 md:p-8 lg:p-10 max-w-4xl mx-auto ml-auto transition-all duration-700 ease-out opacity-0"
               style={{ 
                 transform: "translateY(50px) translateX(30px)",
                 boxShadow: "0 20px 40px rgba(0, 0, 0, 0.7), 0 0 40px rgba(34, 197, 94, 0.2)"
               }}
             >
-              <p className="text-xl md:text-2xl text-green-100 leading-relaxed">
+              <p className="text-lg md:text-xl lg:text-2xl text-green-100 leading-relaxed">
                 RATTLER with an obsessive desire for evil and menace jumped at this opportunity in reaching the penguin land, his hatred grew far more worse when he realized those penguins didn't only killed its parents but have also taken over the entire chain and not allowing new players a fair chance.
               </p>
             </div>
@@ -534,14 +595,14 @@ Strike Fast, Strike Hard, Strike $RTR
                   observer.observe(el)
                 }
               }}
-              className="bg-gradient-to-br from-green-900/30 to-lime-900/30 backdrop-blur-sm border border-lime-400/30 rounded-2xl p-8 md:p-10 max-w-5xl mx-auto transition-all duration-800 ease-out opacity-0"
+              className="bg-gradient-to-br from-green-900/30 to-lime-900/30 backdrop-blur-sm border border-lime-400/30 rounded-2xl p-4 md:p-8 lg:p-10 max-w-5xl mx-auto transition-all duration-800 ease-out opacity-0"
               style={{ 
                 transform: "translateY(60px) scale(0.95)",
                 boxShadow: "0 20px 40px rgba(0, 0, 0, 0.8), 0 0 60px rgba(132, 204, 22, 0.3)"
               }}
             >
-              <p className="text-xl md:text-2xl text-white leading-relaxed text-center">
-                <strong className="text-lime-300 text-2xl md:text-3xl">RTR plans to eat them all, take its revenge & serve justice to the green chain 🫰</strong>
+              <p className="text-lg md:text-xl lg:text-2xl text-white leading-relaxed text-center">
+                <strong className="text-lime-300 text-xl md:text-2xl lg:text-3xl">RTR plans to eat them all, take its revenge & serve justice to the green chain 🫰</strong>
                 <br /><br />
                 <span className="text-yellow-300">Nothing can save the penguins now! 🐧</span>
               </p>
@@ -564,7 +625,7 @@ Strike Fast, Strike Hard, Strike $RTR
                   observer.observe(el)
                 }
               }}
-              className="bg-red-900/20 backdrop-blur-sm border border-red-500/20 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto transition-all duration-700 ease-out opacity-0"
+              className="bg-red-900/20 backdrop-blur-sm border border-red-500/20 rounded-2xl p-4 md:p-8 lg:p-10 max-w-4xl mx-auto transition-all duration-700 ease-out opacity-0"
               style={{ 
                 transform: "translateY(50px) translateX(-25px)",
                 boxShadow: "0 20px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(239, 68, 68, 0.3)"
