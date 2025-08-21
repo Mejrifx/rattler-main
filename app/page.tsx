@@ -404,7 +404,7 @@ export default function RattlerLandingPage() {
         {/* Mobile-only: Title at top */}
         <div className="md:hidden text-center z-20 max-w-4xl mx-auto relative pt-4 mb-8">
           <h1
-            className={`text-3xl font-bold mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+            className={`text-3xl font-bold mb-3 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
               heroVisible 
                 ? "opacity-100 transform translate-x-0" 
                 : "opacity-0 transform -translate-x-full"
@@ -446,7 +446,7 @@ export default function RattlerLandingPage() {
             </h1>
 
             <p
-              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-6 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
+              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-4 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform translate-x-full"
@@ -463,7 +463,7 @@ export default function RattlerLandingPage() {
 
             {/* Snake-themed animated subtitle */}
             <div
-              className={`text-base md:text-lg text-lime-400 font-semibold mb-12 md:mb-0 transition-all duration-800 ease-out ${
+              className={`text-base md:text-lg text-lime-400 font-semibold mb-8 md:mb-0 transition-all duration-800 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-y-0" 
                   : "opacity-0 transform translate-y-8"
