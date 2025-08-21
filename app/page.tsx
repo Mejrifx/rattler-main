@@ -12,7 +12,7 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5)
+  const [visibleImages, setVisibleImages] = useState(12) // Show 12 images initially (3 rows: 2x3 mobile, 3x3 tablet, 4x3 desktop)
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -395,20 +395,76 @@ export default function RattlerLandingPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-xl" />
         <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-lime-500/8 rounded-full blur-lg" />
 
-        <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative">
+        <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative flex flex-col justify-between min-h-[calc(100vh-8rem)] md:min-h-0 md:block">
+          
+          {/* Text Content - Mobile: Top, Desktop: Same */}
+          <div className="flex-1 flex flex-col justify-center md:block">
+            <h1
+              className={`text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+                heroVisible 
+                  ? "opacity-100 transform translate-x-0" 
+                  : "opacity-0 transform -translate-x-full"
+              }`}
+              style={{
+                transitionDelay: "0.2s",
+                textShadow: "0 0 40px rgba(34, 197, 94, 0.6), 0 0 80px rgba(132, 204, 22, 0.4), 0 0 120px rgba(16, 185, 129, 0.3)",
+                filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7))",
+                fontFamily: "'Orbitron', monospace",
+                letterSpacing: "0.05em"
+              }}
+            >
+              Welcome to Rattler's World
+            </h1>
+
+            <p
+              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-4 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
+                heroVisible 
+                  ? "opacity-100 transform translate-x-0" 
+                  : "opacity-0 transform translate-x-full"
+              }`}
+              style={{
+                transitionDelay: "0.4s",
+                textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(34, 197, 94, 0.3)",
+                filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
+                fontFamily: "'Courier New', monospace"
+              }}
+            >
+              The most venomous meme coin on Abstract Chain with lightning-fast strikes and endless possibilities
+            </p>
+
+            {/* Snake-themed animated subtitle */}
+            <div
+              className={`text-base md:text-lg text-lime-400 font-semibold mb-8 md:mb-0 transition-all duration-800 ease-out ${
+                heroVisible 
+                  ? "opacity-100 transform translate-y-0" 
+                  : "opacity-0 transform translate-y-8"
+              }`}
+              style={{
+                transitionDelay: "0.6s",
+                textShadow: "0 0 30px rgba(132, 204, 22, 0.6), 0 0 60px rgba(34, 197, 94, 0.4), 0 2px 8px rgba(0, 0, 0, 0.9)",
+                filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7))",
+                fontFamily: "'Orbitron', monospace",
+                letterSpacing: "0.1em"
+              }}
+            >
+              Strike Fast, Strike Hard, Strike $RTR
+            </div>
+          </div>
+
+          {/* Buttons - Mobile: Bottom, Desktop: Below text with margin */}
           <div
-            className={`mb-8 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ease-out ${
+            className={`mt-auto md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center transition-all duration-1000 ease-out ${
               heroVisible 
                 ? "opacity-100 transform translate-y-0" 
                 : "opacity-0 transform translate-y-16"
             }`}
             style={{
-              transitionDelay: "0.2s"
+              transitionDelay: "0.8s"
             }}
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-black font-bold py-4 px-8 rounded-full text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-green-400/30"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-black font-bold py-3 md:py-4 px-6 md:px-8 rounded-full text-lg md:text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-green-400/30"
               style={{
                 boxShadow: "0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(34, 197, 94, 0.2)",
                 fontFamily: "'Orbitron', monospace"
@@ -420,7 +476,7 @@ export default function RattlerLandingPage() {
             </Button>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-black font-bold py-4 px-8 rounded-full text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-emerald-400/30"
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-black font-bold py-3 md:py-4 px-6 md:px-8 rounded-full text-lg md:text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-emerald-400/30"
               style={{
                 boxShadow: "0 0 30px rgba(16, 185, 129, 0.4), 0 0 60px rgba(16, 185, 129, 0.2)",
                 fontFamily: "'Orbitron', monospace"
@@ -435,7 +491,7 @@ export default function RattlerLandingPage() {
             </Button>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-lime-600 to-green-600 hover:from-lime-700 hover:to-green-700 text-black font-bold py-4 px-8 rounded-full text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-lime-400/30"
+              className="bg-gradient-to-r from-lime-600 to-green-600 hover:from-lime-700 hover:to-green-700 text-black font-bold py-3 md:py-4 px-6 md:px-8 rounded-full text-lg md:text-xl hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm border border-lime-400/30"
               style={{
                 boxShadow: "0 0 30px rgba(132, 204, 22, 0.4), 0 0 60px rgba(132, 204, 22, 0.2)",
                 fontFamily: "'Orbitron', monospace"
@@ -445,57 +501,6 @@ export default function RattlerLandingPage() {
             >
               Explore Rattler
             </Button>
-          </div>
-
-          <h1
-            className={`text-4xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
-              heroVisible 
-                ? "opacity-100 transform translate-x-0" 
-                : "opacity-0 transform -translate-x-full"
-            }`}
-            style={{
-              transitionDelay: "0.4s",
-              textShadow: "0 0 40px rgba(34, 197, 94, 0.6), 0 0 80px rgba(132, 204, 22, 0.4), 0 0 120px rgba(16, 185, 129, 0.3)",
-              filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7))",
-              fontFamily: "'Orbitron', monospace",
-              letterSpacing: "0.05em"
-            }}
-          >
-            Welcome to Rattler's World
-          </h1>
-
-          <p
-            className={`text-xl md:text-2xl text-green-100 mb-8 leading-relaxed transition-all duration-1000 ease-out ${
-              heroVisible 
-                ? "opacity-100 transform translate-x-0" 
-                : "opacity-0 transform translate-x-full"
-            }`}
-            style={{
-              transitionDelay: "0.6s",
-              textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(34, 197, 94, 0.3)",
-              filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
-              fontFamily: "'Courier New', monospace"
-            }}
-          >
-            The most venomous meme coin on Abstract Chain with lightning-fast strikes and endless possibilities
-          </p>
-
-          {/* Snake-themed animated subtitle */}
-          <div
-            className={`text-lg text-lime-400 font-semibold transition-all duration-800 ease-out ${
-              heroVisible 
-                ? "opacity-100 transform translate-y-0" 
-                : "opacity-0 transform translate-y-8"
-            }`}
-            style={{
-              transitionDelay: "0.8s",
-              textShadow: "0 0 30px rgba(132, 204, 22, 0.6), 0 0 60px rgba(34, 197, 94, 0.4), 0 2px 8px rgba(0, 0, 0, 0.9)",
-              filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7))",
-              fontFamily: "'Orbitron', monospace",
-              letterSpacing: "0.1em"
-            }}
-          >
-Strike Fast, Strike Hard, Strike $RTR
           </div>
         </div>
       </section>
