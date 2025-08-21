@@ -230,7 +230,7 @@ export default function RattlerLandingPage() {
             >
               <div className="w-8 h-8 rounded-full overflow-hidden group-hover:scale-110 transition-all duration-300 border-2 border-green-400/50 group-hover:border-green-300">
                 <img 
-                  src="/rattler-head.jpg" 
+                  src="/rattler-head.png" 
                   alt="Rattler Logo" 
                   className="w-full h-full object-cover"
                 />
