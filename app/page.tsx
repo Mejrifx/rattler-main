@@ -431,16 +431,11 @@ export default function RattlerLandingPage() {
               transitionDelay: "0.4s"
             }}
           >
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-400/50 shadow-2xl">
-              <img 
-                src="/rattler-coffee.png" 
-                alt="Rattler" 
-                className="w-full h-full object-cover"
-                style={{
-                  filter: "drop-shadow(0 0 20px rgba(34, 197, 94, 0.5))"
-                }}
-              />
-            </div>
+            <img 
+              src="/rattler-coffee.png" 
+              alt="Rattler" 
+              className="w-32 h-32"
+            />
           </div>
         </div>
 
