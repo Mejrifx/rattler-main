@@ -12,7 +12,7 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [visibleImages, setVisibleImages] = useState(16) // Show 16 images initially (3 rows of 5 + 1 row of 1, leaving 2 in last row)
+  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5)
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -151,7 +151,7 @@ export default function RattlerLandingPage() {
   }
 
   const loadMoreImages = () => {
-    setVisibleImages(prev => Math.min(prev + 5, galleryImages.length)) // Load 5 more images (1 more row)
+    setVisibleImages(galleryImages.length) // Show all remaining images when clicked
   }
 
   // Smooth scroll to section
@@ -230,7 +230,7 @@ export default function RattlerLandingPage() {
             >
               <div className="w-8 h-8 rounded-full overflow-hidden group-hover:scale-110 transition-all duration-300 border-2 border-green-400/50 group-hover:border-green-300">
                 <img 
-                  src="/rattler-coffee.png" 
+                  src="/rattler-head.jpg" 
                   alt="Rattler Logo" 
                   className="w-full h-full object-cover"
                 />
