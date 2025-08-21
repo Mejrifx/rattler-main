@@ -15,6 +15,8 @@ export default function RattlerLandingPage() {
   const [visibleImages, setVisibleImages] = useState(12) // Show 12 images initially (3 rows: 2x3 mobile, 3x3 tablet, 4x3 desktop)
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [audioStarted, setAudioStarted] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   const heroTextRef = useRef<HTMLDivElement>(null)
   const journeyTitleRef = useRef<HTMLHeadingElement>(null)
@@ -165,6 +167,35 @@ export default function RattlerLandingPage() {
     }
   }
 
+  // Start audio on user interaction
+  const startAudio = () => {
+    if (audioRef.current && !audioStarted) {
+      audioRef.current.play().catch(e => console.log('Audio play failed:', e))
+      setAudioStarted(true)
+    }
+  }
+
+  // Add click listener to start audio on any user interaction
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      startAudio()
+      // Remove listener after first interaction
+      document.removeEventListener('click', handleUserInteraction)
+      document.removeEventListener('keydown', handleUserInteraction)
+      document.removeEventListener('touchstart', handleUserInteraction)
+    }
+
+    document.addEventListener('click', handleUserInteraction)
+    document.addEventListener('keydown', handleUserInteraction)
+    document.addEventListener('touchstart', handleUserInteraction)
+
+    return () => {
+      document.removeEventListener('click', handleUserInteraction)
+      document.removeEventListener('keydown', handleUserInteraction)
+      document.removeEventListener('touchstart', handleUserInteraction)
+    }
+  }, [])
+
   const TokenomicsCard = ({ title, value, description }: { title: string; value: string; description: string }) => (
     <Card className="bg-transparent border-green-500/20 hover:border-green-400/40 transition-all duration-300 hover:scale-105">
       <CardContent className="p-6 text-center">
@@ -191,17 +222,30 @@ export default function RattlerLandingPage() {
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: "'Orbitron', 'Courier New', monospace" }}>
-      {/* Auto-playing background music */}
+      {/* Background music - starts on user interaction */}
       <audio
-        autoPlay
+        ref={audioRef}
         loop
         muted={false}
         className="hidden"
         preload="auto"
+        volume={0.3}
       >
         <source src="/Rattler Lofi.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+
+      {/* Audio prompt for first-time visitors */}
+      {!audioStarted && (
+        <div className="fixed bottom-4 right-4 z-50 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-2xl p-4 text-center max-w-sm">
+          <p className="text-green-400 text-sm mb-2" style={{ fontFamily: "'Orbitron', monospace" }}>
+            🎵 Click anywhere to start the Rattler Lofi experience
+          </p>
+          <div className="w-full h-1 bg-green-900/30 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-green-400 to-lime-300 rounded-full animate-pulse"></div>
+          </div>
+        </div>
+      )}
       {/* Copy Notification */}
       <div
         className={`fixed top-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
