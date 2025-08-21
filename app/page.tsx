@@ -420,23 +420,7 @@ export default function RattlerLandingPage() {
             Welcome to Rattler's World
           </h1>
 
-          {/* Mobile-only: Rattler coffee image */}
-          <div
-            className={`mb-6 flex justify-center transition-all duration-1000 ease-out ${
-              heroVisible 
-                ? "opacity-100 transform scale-100" 
-                : "opacity-0 transform scale-95"
-            }`}
-            style={{
-              transitionDelay: "0.4s"
-            }}
-          >
-            <img 
-              src="/rattler-coffee.png" 
-              alt="Rattler" 
-              className="w-32 h-32"
-            />
-          </div>
+
         </div>
 
         <div ref={heroTextRef} className="text-center z-20 max-w-4xl mx-auto relative flex flex-col justify-between min-h-[calc(100vh-16rem)] md:min-h-0 md:block">
@@ -462,13 +446,13 @@ export default function RattlerLandingPage() {
             </h1>
 
             <p
-              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-4 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
+              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-6 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform translate-x-full"
               }`}
               style={{
-                transitionDelay: "0.6s",
+                transitionDelay: "0.4s",
                 textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(34, 197, 94, 0.3)",
                 filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
                 fontFamily: "'Courier New', monospace"
@@ -479,13 +463,13 @@ export default function RattlerLandingPage() {
 
             {/* Snake-themed animated subtitle */}
             <div
-              className={`text-base md:text-lg text-lime-400 font-semibold mb-8 md:mb-0 transition-all duration-800 ease-out ${
+              className={`text-base md:text-lg text-lime-400 font-semibold mb-12 md:mb-0 transition-all duration-800 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-y-0" 
                   : "opacity-0 transform translate-y-8"
               }`}
               style={{
-                transitionDelay: "0.8s",
+                transitionDelay: "0.6s",
                 textShadow: "0 0 30px rgba(132, 204, 22, 0.6), 0 0 60px rgba(34, 197, 94, 0.4), 0 2px 8px rgba(0, 0, 0, 0.9)",
                 filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7))",
                 fontFamily: "'Orbitron', monospace",
@@ -496,9 +480,9 @@ export default function RattlerLandingPage() {
             </div>
           </div>
 
-          {/* Buttons - Mobile: Bottom, Desktop: Below text with margin */}
+          {/* Buttons - Mobile: Bottom with more spacing, Desktop: Below text with margin */}
           <div
-            className={`mt-auto md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center transition-all duration-1000 ease-out ${
+            className={`mt-auto md:mt-8 flex flex-col sm:flex-row gap-6 md:gap-4 justify-center transition-all duration-1000 ease-out ${
               heroVisible 
                 ? "opacity-100 transform translate-y-0" 
                 : "opacity-0 transform translate-y-16"
