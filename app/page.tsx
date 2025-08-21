@@ -191,6 +191,17 @@ export default function RattlerLandingPage() {
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: "'Orbitron', 'Courier New', monospace" }}>
+      {/* Auto-playing background music */}
+      <audio
+        autoPlay
+        loop
+        muted={false}
+        className="hidden"
+        preload="auto"
+      >
+        <source src="/Rattler Lofi.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
       {/* Copy Notification */}
       <div
         className={`fixed top-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
@@ -404,7 +415,7 @@ export default function RattlerLandingPage() {
         {/* Mobile-only: Title at top */}
         <div className="md:hidden text-center z-20 max-w-4xl mx-auto relative pt-6 mb-8">
           <h1
-            className={`text-3xl font-bold mb-8 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out relative ${
+            className={`text-3xl font-bold mb-12 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out relative ${
               heroVisible 
                 ? "opacity-100 transform translate-x-0" 
                 : "opacity-0 transform -translate-x-full"
@@ -466,7 +477,7 @@ export default function RattlerLandingPage() {
             </h1>
 
             <p
-              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-8 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
+              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-4 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform translate-x-full"
