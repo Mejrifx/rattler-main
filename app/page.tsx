@@ -55,8 +55,8 @@ export default function RattlerLandingPage() {
       if (!ticking) {
         requestAnimationFrame(() => {
           setScrollY(window.scrollY)
-          // Show nav when scrolling down from top
-          setIsNavVisible(window.scrollY > 100)
+          // Show nav at top, hide when scrolling down
+          setIsNavVisible(window.scrollY < 100)
           ticking = false
         })
         ticking = true
