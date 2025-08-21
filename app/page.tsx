@@ -402,9 +402,9 @@ export default function RattlerLandingPage() {
         <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-lime-500/8 rounded-full blur-lg" />
 
         {/* Mobile-only: Title at top */}
-        <div className="md:hidden text-center z-20 max-w-4xl mx-auto relative pt-4 mb-8">
+        <div className="md:hidden text-center z-20 max-w-4xl mx-auto relative pt-8 mb-8">
           <h1
-            className={`text-3xl font-bold mb-3 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+            className={`text-3xl font-bold mb-4 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out relative ${
               heroVisible 
                 ? "opacity-100 transform translate-x-0" 
                 : "opacity-0 transform -translate-x-full"
@@ -418,6 +418,16 @@ export default function RattlerLandingPage() {
             }}
           >
             Welcome to Rattler's World
+            {/* Neon glow underline */}
+            <div 
+              className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-lime-400 to-transparent transition-all duration-1200 ease-out ${
+                heroVisible ? "w-full opacity-100" : "w-0 opacity-0"
+              }`}
+              style={{
+                transitionDelay: "0.6s",
+                boxShadow: "0 0 10px rgba(132, 204, 22, 0.8), 0 0 20px rgba(132, 204, 22, 0.6), 0 0 30px rgba(132, 204, 22, 0.4)"
+              }}
+            ></div>
           </h1>
 
 
@@ -429,7 +439,7 @@ export default function RattlerLandingPage() {
           <div className="flex-1 flex flex-col justify-center md:block">
             {/* Desktop-only title */}
             <h1
-              className={`hidden md:block text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out ${
+              className={`hidden md:block text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-lime-400 to-emerald-400 bg-clip-text text-transparent transition-all duration-1200 ease-out relative ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform -translate-x-full"
@@ -443,6 +453,16 @@ export default function RattlerLandingPage() {
               }}
             >
               Welcome to Rattler's World
+              {/* Neon glow underline */}
+              <div 
+                className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-lime-400 to-transparent transition-all duration-1200 ease-out ${
+                  heroVisible ? "w-full opacity-100" : "w-0 opacity-0"
+                }`}
+                style={{
+                  transitionDelay: "0.6s",
+                  boxShadow: "0 0 15px rgba(132, 204, 22, 0.8), 0 0 30px rgba(132, 204, 22, 0.6), 0 0 45px rgba(132, 204, 22, 0.4)"
+                }}
+              ></div>
             </h1>
 
             <p
