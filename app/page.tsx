@@ -13,6 +13,7 @@ export default function RattlerLandingPage() {
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5)
+  const [isNavVisible, setIsNavVisible] = useState(true)
 
   const heroTextRef = useRef<HTMLDivElement>(null)
   const journeyTitleRef = useRef<HTMLHeadingElement>(null)
@@ -54,6 +55,8 @@ export default function RattlerLandingPage() {
       if (!ticking) {
         requestAnimationFrame(() => {
           setScrollY(window.scrollY)
+          // Show nav when scrolling down from top
+          setIsNavVisible(window.scrollY > 100)
           ticking = false
         })
         ticking = true
@@ -150,6 +153,17 @@ export default function RattlerLandingPage() {
     setVisibleImages(prev => Math.min(prev + 5, galleryImages.length)) // Load 5 more images (1 more row)
   }
 
+  // Smooth scroll to section
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   const TokenomicsCard = ({ title, value, description }: { title: string; value: string; description: string }) => (
     <Card className="bg-transparent border-green-500/20 hover:border-green-400/40 transition-all duration-300 hover:scale-105">
       <CardContent className="p-6 text-center">
@@ -202,6 +216,69 @@ export default function RattlerLandingPage() {
         </div>
       </div>
 
+      {/* Navigation Bar */}
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-out ${
+        isNavVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div 
+              className="flex items-center gap-3 cursor-pointer group"
+              onClick={() => scrollToSection('hero')}
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <span className="text-black font-bold text-sm">R</span>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-lime-300 bg-clip-text text-transparent group-hover:drop-shadow-[0_0_10px_rgba(34,197,94,0.8)] transition-all duration-300" style={{ fontFamily: "'Orbitron', monospace" }}>
+                RATTLER
+              </span>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center gap-8">
+              {[
+                { label: 'About', target: 'about' },
+                { label: 'How to Buy', target: 'howtobuy' },
+                { label: 'Gallery', target: 'gallery' },
+                { label: 'Community', target: 'community' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.target)}
+                  className="relative px-4 py-2 text-gray-300 hover:text-lime-400 transition-all duration-300 group"
+                >
+                  <span className="relative z-10 font-medium">{item.label}</span>
+                  {/* Hover underline effect */}
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-lime-300 group-hover:w-full transition-all duration-300"></div>
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300" style={{
+                    background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.1) 0%, transparent 70%)",
+                    boxShadow: "0 0 20px rgba(34, 197, 94, 0.2)"
+                  }}></div>
+                </button>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <Button
+              className="hidden md:block bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-black font-bold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 shadow-lg border border-green-400/30 backdrop-blur-sm"
+              style={{
+                boxShadow: "0 0 20px rgba(34, 197, 94, 0.3)"
+              }}
+              asChild
+            >
+              <a href="https://portal.abs.xyz/trade?buy=0xc3882e7ce4d62bb571a6f417419c4e0ecb82d944&showChart=true&showHistory=true" target="_blank" rel="noopener noreferrer">
+                Buy $RTR
+              </a>
+            </Button>
+          </div>
+        </div>
+        
+        {/* Navigation background with blur */}
+        <div className="absolute inset-0 -z-10 bg-black/20 backdrop-blur-md border-b border-green-500/20"></div>
+      </nav>
+
       {/* Consistent Background Layer */}
       <div className="fixed inset-0 -z-10">
         {/* Base gradient */}
@@ -231,7 +308,7 @@ export default function RattlerLandingPage() {
         }}></div>
       </div>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
         {/* Background Image with Blending */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
@@ -363,7 +440,7 @@ Strike Fast, Strike Hard, Strike $RTR
       </section>
 
       {/* About Rattler Section */}
-      <section className="py-20 px-4">
+      <section id="about" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Title */}
           <div className="text-center mb-16">
@@ -584,7 +661,7 @@ Strike Fast, Strike Hard, Strike $RTR
       </section>
 
       {/* Gallery Section */}
-      <section className="py-20 px-4">
+      <section id="gallery" className="py-20 px-4">
         <div className="max-w-6xl mx-auto relative z-10">
           <h2
             ref={galleryTitleRef}
@@ -681,8 +758,8 @@ Strike Fast, Strike Hard, Strike $RTR
         </div>
       </section>
 
-      {/* Repeated Lily's Journey Section */}
-      <section className="py-20 px-4 relative">
+      {/* How to Buy Section */}
+      <section id="howtobuy" className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
               <h2
@@ -747,7 +824,7 @@ Strike Fast, Strike Hard, Strike $RTR
       </section>
 
       {/* Join Lily's Adventure Footer */}
-      <section className="py-20 px-4">
+      <section id="community" className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2
             ref={joinTitleRef}
