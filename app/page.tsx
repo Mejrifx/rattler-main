@@ -12,7 +12,14 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5 images)
+  const [visibleImages, setVisibleImages] = useState(() => {
+    // Mobile: 2 columns × 4 rows = 8 images
+    // Desktop: 5 columns × 3 rows = 15 images
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 8 : 15
+    }
+    return 15 // Default for SSR
+  })
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [audioStarted, setAudioStarted] = useState(false)
@@ -194,6 +201,20 @@ export default function RattlerLandingPage() {
       document.removeEventListener('keydown', handleUserInteraction)
       document.removeEventListener('touchstart', handleUserInteraction)
     }
+  }, [])
+
+  // Handle window resize to update visible images for responsive design
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768
+      setVisibleImages(isMobile ? 8 : 15)
+    }
+
+    // Set initial value
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const TokenomicsCard = ({ title, value, description }: { title: string; value: string; description: string }) => (
@@ -521,7 +542,7 @@ export default function RattlerLandingPage() {
             </h1>
 
             <p
-              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-4 md:mb-8 leading-relaxed transition-all duration-1000 ease-out ${
+              className={`text-lg md:text-xl lg:text-2xl text-green-100 mb-2 md:mb-6 leading-relaxed transition-all duration-1000 ease-out ${
                 heroVisible 
                   ? "opacity-100 transform translate-x-0" 
                   : "opacity-0 transform translate-x-full"
