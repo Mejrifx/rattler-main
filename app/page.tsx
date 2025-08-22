@@ -12,7 +12,7 @@ export default function RattlerLandingPage() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [visibleImages, setVisibleImages] = useState(12) // Show 12 images initially (3 rows: 2x3 mobile, 3x3 tablet, 4x3 desktop)
+  const [visibleImages, setVisibleImages] = useState(15) // Show 15 images initially (3 rows of 5 images)
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [audioStarted, setAudioStarted] = useState(false)
@@ -842,7 +842,7 @@ export default function RattlerLandingPage() {
           </h2>
 
                   {/* Grid Gallery */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 lg:gap-10">
           {galleryImages.slice(0, visibleImages).map((src, index) => (
             <div
               key={index}
