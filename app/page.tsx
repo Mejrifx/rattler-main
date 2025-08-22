@@ -258,9 +258,9 @@ export default function RattlerLandingPage() {
 
 
 
-      {/* Audio prompt for first-time visitors */}
+      {/* Audio prompt for first-time visitors - Desktop only */}
       {!audioStarted && (
-        <div className="fixed bottom-4 right-4 z-50 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-2xl p-4 text-center max-w-sm">
+        <div className="hidden md:block fixed bottom-4 right-4 z-50 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-2xl p-4 text-center max-w-sm">
           <p className="text-green-400 text-sm mb-2" style={{ fontFamily: "'Orbitron', monospace" }}>
             🎵 Click anywhere to start the Rattler Lofi experience
           </p>
@@ -346,8 +346,8 @@ export default function RattlerLandingPage() {
               </span>
             </div>
 
-            {/* Mobile Watermark - Right of logo with more spacing */}
-            <div className="md:hidden mr-8">
+            {/* Mobile Watermark - Right of logo, closer to hamburger menu */}
+            <div className="md:hidden mr-2">
               <div className="text-xs text-gray-400" style={{ fontFamily: "'Orbitron', monospace" }}>
                 Built by{" "}
                 <a
@@ -564,6 +564,19 @@ export default function RattlerLandingPage() {
             ></div>
           </h1>
 
+          {/* Mobile Music Button - Under welcome text */}
+          {!audioStarted && (
+            <div className="block md:hidden mt-4 mb-6">
+              <div className="bg-black/60 backdrop-blur-lg border border-green-400/50 rounded-xl p-3 text-center max-w-xs mx-auto">
+                <p className="text-green-400 text-xs" style={{ fontFamily: "'Orbitron', monospace" }}>
+                  🎵 Click anywhere to start the Rattler Lofi experience
+                </p>
+                <div className="w-full h-0.5 bg-green-900/30 rounded-full overflow-hidden mt-2">
+                  <div className="h-full bg-gradient-to-r from-green-400 to-lime-300 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+            </div>
+          )}
 
         </div>
 
