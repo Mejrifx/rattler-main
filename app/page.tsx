@@ -301,7 +301,7 @@ export default function RattlerLandingPage() {
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-4 relative">
           {/* Desktop Watermark - Positioned absolutely to not affect layout */}
-          <div className="hidden md:block absolute left-2 top-1/2 transform -translate-y-1/2">
+          <div className="hidden md:block absolute -left-32 top-1/2 transform -translate-y-1/2">
             <a
               href="https://t.me/mejrifx"
               target="_blank"
