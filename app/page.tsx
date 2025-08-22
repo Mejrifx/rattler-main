@@ -256,6 +256,35 @@ export default function RattlerLandingPage() {
         Your browser does not support the audio element.
       </audio>
 
+      {/* Floating Social Icons */}
+      <div className="fixed bottom-4 left-4 z-50 flex flex-col gap-3">
+        {/* Telegram Button */}
+        <a
+          href="https://t.me/rtrabs"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group w-12 h-12 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-full flex items-center justify-center hover:bg-green-500/20 hover:border-green-300 hover:scale-110 transition-all duration-300"
+          style={{
+            boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.2)"
+          }}
+        >
+          <Send className="w-5 h-5 text-green-400 group-hover:text-green-300 transition-colors duration-300" />
+        </a>
+
+        {/* X (Twitter) Button */}
+        <a
+          href="https://x.com/RattlerOnAbs"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group w-12 h-12 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-full flex items-center justify-center hover:bg-green-500/20 hover:border-green-300 hover:scale-110 transition-all duration-300"
+          style={{
+            boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.2)"
+          }}
+        >
+          <X className="w-5 h-5 text-green-400 group-hover:text-green-300 transition-colors duration-300" />
+        </a>
+      </div>
+
       {/* Audio prompt for first-time visitors */}
       {!audioStarted && (
         <div className="fixed bottom-4 right-4 z-50 bg-black/80 backdrop-blur-lg border border-green-400/50 rounded-2xl p-4 text-center max-w-sm">
