@@ -1189,6 +1189,34 @@ export default function RattlerLandingPage() {
           </div>
         </div>
       )}
+
+      {/* Watermark */}
+      <div className="relative z-10 py-6 text-center">
+        <p className="text-sm text-gray-400" style={{ fontFamily: "'Orbitron', monospace" }}>
+          Built by{" "}
+          <a
+            href="https://t.me/mejrifx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center font-bold text-green-400 hover:text-green-300 transition-all duration-300 cursor-pointer"
+            style={{
+              textShadow: "0 0 10px rgba(34, 197, 94, 0.5)",
+              filter: "drop-shadow(0 0 8px rgba(34, 197, 94, 0.3))"
+            }}
+          >
+            <span className="group-hover:scale-105 transition-transform duration-300">
+              @Mejrifx
+            </span>
+            <div 
+              className="absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+              style={{
+                background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.1) 0%, transparent 70%)",
+                boxShadow: "0 0 20px rgba(34, 197, 94, 0.3)"
+              }}
+            ></div>
+          </a>
+        </p>
+      </div>
     </div>
   )
 }
