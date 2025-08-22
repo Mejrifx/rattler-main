@@ -302,28 +302,30 @@ export default function RattlerLandingPage() {
         <div className="max-w-7xl mx-auto px-6 py-4 relative">
           {/* Desktop Watermark - Positioned absolutely to not affect layout */}
           <div className="hidden md:block absolute -left-32 top-1/2 transform -translate-y-1/2">
-            <a
-              href="https://t.me/mejrifx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center text-xs font-bold text-green-400/70 hover:text-green-300 transition-all duration-300 cursor-pointer"
-              style={{
-                textShadow: "0 0 8px rgba(34, 197, 94, 0.4)",
-                filter: "drop-shadow(0 0 6px rgba(34, 197, 94, 0.2))",
-                fontFamily: "'Orbitron', monospace"
-              }}
-            >
-              <span className="group-hover:scale-105 transition-transform duration-300">
-                Built by @Mejrifx
-              </span>
-              <div 
-                className="absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+            <div className="text-xs text-gray-400" style={{ fontFamily: "'Orbitron', monospace" }}>
+              Built by{" "}
+              <a
+                href="https://t.me/mejrifx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center font-bold text-green-400 hover:text-green-300 transition-all duration-300 cursor-pointer"
                 style={{
-                  background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.08) 0%, transparent 70%)",
-                  boxShadow: "0 0 15px rgba(34, 197, 94, 0.2)"
+                  textShadow: "0 0 8px rgba(34, 197, 94, 0.4)",
+                  filter: "drop-shadow(0 0 6px rgba(34, 197, 94, 0.2))"
                 }}
-              ></div>
-            </a>
+              >
+                <span className="group-hover:scale-105 transition-transform duration-300">
+                  @Mejrifx
+                </span>
+                <div 
+                  className="absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+                  style={{
+                    background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.08) 0%, transparent 70%)",
+                    boxShadow: "0 0 15px rgba(34, 197, 94, 0.2)"
+                  }}
+                ></div>
+              </a>
+            </div>
           </div>
 
           <div className="flex items-center justify-between">
@@ -346,28 +348,30 @@ export default function RattlerLandingPage() {
 
             {/* Mobile Watermark - Right of logo with more spacing */}
             <div className="md:hidden mr-4">
-              <a
-                href="https://t.me/mejrifx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center text-xs font-bold text-green-400/70 hover:text-green-300 transition-all duration-300 cursor-pointer"
-                style={{
-                  textShadow: "0 0 8px rgba(34, 197, 94, 0.4)",
-                  filter: "drop-shadow(0 0 6px rgba(34, 197, 94, 0.2))",
-                  fontFamily: "'Orbitron', monospace"
-                }}
-              >
-                <span className="group-hover:scale-105 transition-transform duration-300">
-                  Built by @Mejrifx
-                </span>
-                <div 
-                  className="absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+              <div className="text-xs text-gray-400" style={{ fontFamily: "'Orbitron', monospace" }}>
+                Built by{" "}
+                <a
+                  href="https://t.me/mejrifx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center font-bold text-green-400 hover:text-green-300 transition-all duration-300 cursor-pointer"
                   style={{
-                    background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.08) 0%, transparent 70%)",
-                    boxShadow: "0 0 15px rgba(34, 197, 94, 0.2)"
+                    textShadow: "0 0 8px rgba(34, 197, 94, 0.4)",
+                    filter: "drop-shadow(0 0 6px rgba(34, 197, 94, 0.2))"
                   }}
-                ></div>
-              </a>
+                >
+                  <span className="group-hover:scale-105 transition-transform duration-300">
+                    @Mejrifx
+                  </span>
+                  <div 
+                    className="absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+                    style={{
+                      background: "radial-gradient(circle at center, rgba(34, 197, 94, 0.08) 0%, transparent 70%)",
+                      boxShadow: "0 0 15px rgba(34, 197, 94, 0.2)"
+                    }}
+                  ></div>
+                </a>
+              </div>
             </div>
 
             {/* Navigation Links */}
