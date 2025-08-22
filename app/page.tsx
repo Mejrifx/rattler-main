@@ -347,7 +347,7 @@ export default function RattlerLandingPage() {
             </div>
 
             {/* Mobile Watermark - Right of logo with more spacing */}
-            <div className="md:hidden mr-4">
+            <div className="md:hidden mr-8">
               <div className="text-xs text-gray-400" style={{ fontFamily: "'Orbitron', monospace" }}>
                 Built by{" "}
                 <a
